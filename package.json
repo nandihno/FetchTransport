@@ -1,0 +1,29 @@
+{
+  "name": "fetchtransport",
+  "version": "1.0.0",
+  "description": "Offline transport GTFS to SQLite builder for bundled iOS data artifacts.",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:victoria-bus": "node --import tsx src/cli.ts build victoria-bus",
+    "validate:victoria-bus": "node --import tsx src/cli.ts validate victoria-bus",
+    "clean:victoria-bus": "node --import tsx src/cli.ts clean victoria-bus",
+    "test": "node --import tsx --test tests/**/*.test.ts"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "csv-parse": "^5.6.0",
+    "rimraf": "^6.0.1",
+    "yauzl": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@types/yauzl": "^2.10.3",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
