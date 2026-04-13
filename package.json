@@ -12,6 +12,9 @@
     "build:victoria-bus": "node --import tsx src/cli.ts build victoria-bus",
     "validate:victoria-bus": "node --import tsx src/cli.ts validate victoria-bus",
     "clean:victoria-bus": "node --import tsx src/cli.ts clean victoria-bus",
+    "build:queensland-bus": "node --import tsx src/cli.ts build queensland-bus",
+    "validate:queensland-bus": "node --import tsx src/cli.ts validate queensland-bus",
+    "clean:queensland-bus": "node --import tsx src/cli.ts clean queensland-bus",
     "test": "node --import tsx --test tests/**/*.test.ts"
   },
   "dependencies": {

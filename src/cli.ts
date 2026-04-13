@@ -1,10 +1,12 @@
 import { Command } from "commander";
 import { rimraf } from "rimraf";
 import { logStep } from "./core/logging.js";
+import { queenslandBusDataset } from "./datasets/queenslandBus/config.js";
 import { victoriaBusDataset } from "./datasets/victoriaBus/config.js";
 
 const datasets = new Map([
   [victoriaBusDataset.id, victoriaBusDataset],
+  [queenslandBusDataset.id, queenslandBusDataset],
 ]);
 
 function getDataset(id: string) {
