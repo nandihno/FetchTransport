@@ -1,3 +1,4 @@
+import { access } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { emptyToNull, streamCsvRecords } from "../../core/csv.js";
 import type { Manifest } from "../../core/dataset.js";
@@ -324,6 +325,7 @@ export async function buildVictoriaBus(dataset: VictoriaBusDatasetConfig): Promi
   const manifestDirectory = dirname(dataset.output.manifestPath);
   const outerZipPath = resolve(dataset.tempDirectory, "gtfs.zip");
   const nestedZipPath = resolve(dataset.tempDirectory, basename(dataset.nestedArchivePath));
+  const legacyManifestPath = resolve(manifestDirectory, "manifest.json");
 
   await removeIfExists(dataset.tempDirectory);
   await ensureDirectory(dataset.tempDirectory);
@@ -331,6 +333,9 @@ export async function buildVictoriaBus(dataset: VictoriaBusDatasetConfig): Promi
   await ensureDirectory(manifestDirectory);
   await removeIfExists(dataset.output.sqlitePath);
   await removeIfExists(dataset.output.manifestPath);
+  if (legacyManifestPath !== dataset.output.manifestPath) {
+    await removeIfExists(legacyManifestPath);
+  }
 
   logStep(`Downloading outer archive from ${dataset.sourceUrl}`);
   await downloadFile(dataset.sourceUrl, outerZipPath);
@@ -381,9 +386,13 @@ export async function buildVictoriaBus(dataset: VictoriaBusDatasetConfig): Promi
     db.close();
     closed = true;
 
+    logStep(`Hashing SQLite database at ${dataset.output.sqlitePath}`);
     const sha256 = await sha256File(dataset.output.sqlitePath);
     manifest.sha256 = sha256;
+
+    logStep(`Writing manifest to ${dataset.output.manifestPath}`);
     await writeManifest(dataset.output.manifestPath, manifest);
+    await access(dataset.output.manifestPath);
 
     logSummary("Build summary", [
       `dataset: ${dataset.id}`,

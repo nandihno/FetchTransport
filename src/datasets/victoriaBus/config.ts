@@ -20,7 +20,7 @@ export function createVictoriaBusDataset(
 ): VictoriaBusDatasetConfig {
   const outputDirectory = resolve(DIST_DIR, "db/transport/victoria");
   const sqlitePath = overrides.output?.sqlitePath ?? resolve(outputDirectory, "gtfs_victorian_bus.sqlite3");
-  const manifestPath = overrides.output?.manifestPath ?? resolve(outputDirectory, "manifest.json");
+  const manifestPath = overrides.output?.manifestPath ?? resolve(outputDirectory, "gtfs_victorian_bus_manifest.json");
 
   const dataset: VictoriaBusDatasetConfig = {
     id: overrides.id ?? "victoria-bus",

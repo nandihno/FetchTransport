@@ -3,9 +3,11 @@ import { rimraf } from "rimraf";
 import { logStep } from "./core/logging.js";
 import { queenslandBusDataset } from "./datasets/queenslandBus/config.js";
 import { victoriaBusDataset } from "./datasets/victoriaBus/config.js";
+import { victoriaTrainDataset } from "./datasets/victoriaTrain/config.js";
 
 const datasets = new Map([
   [victoriaBusDataset.id, victoriaBusDataset],
+  [victoriaTrainDataset.id, victoriaTrainDataset],
   [queenslandBusDataset.id, queenslandBusDataset],
 ]);
 

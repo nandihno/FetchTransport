@@ -24,7 +24,7 @@ async function createTestDataset(fixtureName: string) {
     tempDirectory,
     output: {
       sqlitePath: resolve(outputRoot, "gtfs_victorian_bus.sqlite3"),
-      manifestPath: resolve(outputRoot, "manifest.json"),
+      manifestPath: resolve(outputRoot, "gtfs_victorian_bus_manifest.json"),
     },
   });
 }
